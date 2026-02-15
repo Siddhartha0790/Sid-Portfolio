@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-neon-green: #0f0;
+  --color-neon-purple: #b026ff;
+  --color-terminal-black: #0a0a0a;
+  --color-terminal-gray: #1a1a1a;
+
+  --font-mono: "Fira Code", "JetBrains Mono", monospace;
+  --font-sans: Inter, system-ui, sans-serif;
+
+  --animate-cursor-blink: blink 1s step-end infinite;
+
+  @keyframes blink {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-terminal-black text-gray-300 font-sans antialiased overflow-x-hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-mono font-bold text-white;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-terminal-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-800 rounded-full hover:bg-neon-green/50 transition-colors;
+  }
+}
+
+@layer components {
+  .terminal-box {
+    @apply bg-terminal-gray border border-gray-800 rounded-lg p-6 font-mono relative overflow-hidden;
+  }
+
+  .neon-text {
+    color: var(--color-neon-green);
+    filter: drop-shadow(0 0 5px rgba(0, 255, 0, 0.5));
+  }
+
+  .neon-purple-text {
+    color: var(--color-neon-purple);
+    filter: drop-shadow(0 0 5px rgba(176, 38, 255, 0.5));
+  }
+
+  .command-prompt::before {
+    content: "> ";
+    @apply text-neon-green mr-2;
+  }
+}
